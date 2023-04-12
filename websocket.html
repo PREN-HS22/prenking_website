@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Websocket Beispiel</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<style>
+    h1 {
+  color: blue;
+}
+
+#status {
+  color: red;
+}
+
+#nachrichten li {
+  font-weight: bold;
+}
+
+</style>
+
+<script>
+    // Erstelle eine Websocket-Verbindung
+const socket = new WebSocket('wss://example.com');
+
+// Wenn die Verbindung hergestellt wird, ändere den Verbindungsstatus
+socket.addEventListener('open', () => {
+  document.querySelector('#status').textContent = 'verbunden';
+});
+
+// Wenn eine Nachricht empfangen wird, füge sie der Nachrichtenliste hinzu
+socket.addEventListener('message', event => {
+  const nachricht = JSON.parse(event.data);
+  const li = document.createElement('li');
+  li.textContent = nachricht.text;
+  document.querySelector('#nachrichten').appendChild(li);
+});
+
+</script>
+<body>
+  <h1>Websocket Beispiel</h1>
+  <p>Verbindungsstatus: <span id="status">getrennt</span></p>
+  <ul id="nachrichten"></ul>
+  
+  
+</body>
+</html>

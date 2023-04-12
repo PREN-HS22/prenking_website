@@ -1,0 +1,185 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-align: center;
+}
+
+/* html,
+body,
+.container-fluid
+,
+.row,
+.left-sidebar,
+.right-sidebar {
+    height: 100%;
+} */
+
+.left-sidebar,
+.right-sidebar {
+    background-color: #f2f2f2;
+}
+
+.left-sidebar,
+.right-sidebar{
+    height: 90vh;
+}
+
+.header {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid black;
+    padding: 1rem;
+
+}
+
+#logo {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+
+#title {
+    font-weight: bold;
+    text-align: left;
+    float: left;
+}
+
+
+#subtitle {
+    color: darkgray;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+
+#btn-team {
+    position: absolute;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+
+@media screen and (max-width: 300px) {
+    #title {
+        font-size: 1rem;
+        float: left;
+    }
+
+    #subtitle {
+        font-size: 0.8rem;
+        float: left;
+    }
+}
+
+@media screen and (min-width: 300px) {
+    .header {
+        flex-direction: column;
+
+    }
+
+    #logo {
+        flex-basis: auto;
+        text-align: left;
+        margin-bottom: 0;
+    }
+
+    #title {
+        font-size: 2rem;
+        float: left;
+    }
+
+    #subtitle {
+        font-size: 1.5rem;
+        float: left;
+    }
+
+    .header.responsive button {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    #btn-team {
+        margin-left: 1rem;
+    }
+}
+
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.object {
+    display: flex;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    gap: 20px;
+    height: 25%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.trapezoid {
+    display: grid; 
+    place-items: center;
+    justify-content: center; 
+    align-items: center;
+    --offset: 20%;
+    clip-path: polygon(0% 0, 100% 0%, calc(100% - var(--offset)) 100%, var(--offset) 100%);
+    height: 50%;
+    width: 50%;
+}
+
+@media only screen and (max-width: 300px) {
+    .object {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+    }
+}
+
+#arbeitsplatz {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+#qr-code {
+    position: absolute;
+    width: 5%;
+}
+
+.status {
+    display: grid;
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    bottom: 50px;
+    width: 25%;
+}
+
+.box {
+    width: 80%;
+    height: 30%;
+    margin-left: 10%;
+    margin-top: 20%;
+    border: 2px solid black;
+    display: grid; 
+    place-items: center;
+    justify-content: center; 
+    align-items: center;
+}
+
+.label {
+    border-bottom: 2px solid black;
+}

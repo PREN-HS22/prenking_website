@@ -1,0 +1,9 @@
+{
+	"status": "running",
+	"power": "5000W",
+	"red": 8,
+    "blue": 6,
+    "yellow": 6,
+    "green": 4,
+    "start": 1
+}
