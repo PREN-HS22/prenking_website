@@ -17,10 +17,10 @@ body,
     height: 100%;
 } */
 
-.left-sidebar,
+/* .left-sidebar,
 .right-sidebar {
     background-color: #f2f2f2;
-}
+} */
 
 .left-sidebar,
 .right-sidebar{
@@ -149,14 +149,15 @@ body,
 }
 
 #arbeitsplatz {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: auto;
 }
 
 #qr-code {
-    position: absolute;
-    width: 5%;
+    position: relative;
+    width: 15%;
+    float: right;
 }
 
 .status {
