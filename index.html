@@ -1,96 +1,120 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>PREN</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js"></script>
-	<!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>PREN</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/app.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
 </head>
 <body>
+
+<script>
+ var zigaretten = document.getElementById('zigaretten_box');
+ var zigaretten_value = document.getElementById('zigarette_value');
+
+  zigaretten.onclick = function (){
+    zigaretten_count++;
+    zigaretten_value.textContent = zigaretten_count;
+}
+</script>
+
   <div class="header">
     <div id="logo">
-        <a id="title"> PREN-Professional engineers</a>
-        <br>
-        <br>
-        <a id="subtitle"> HSLU T&A und HSLU I</a>
+      <a id="title"> PREN-Professional engineers</a>
+      <br>
+      <br>
+      <a id="subtitle"> HSLU T&A und HSLU I</a>
 
     </div>
     <!-- <button id="btn-team">Team</button> -->
 
   </div>
-	<div class="container-fluid d-flex flex-column">
-		<div class="row flex-grow-1">
-			<div class="col-md-3 left-sidebar">
-				<div id="kornkorke" class="object">
+  <div class="container-fluid d-flex flex-column">
+    <div class="row flex-grow-1">
+      <div class="col-md-3 left-sidebar">
+        <div id="kronkorke" class="object">
           <h3>Kronkorken</h3>
-          <div class="trapezoid" style="background-color: red;">
-              <h1>8</h1>
+          <div class="trapezoid" style="background-color: red;" onclick="incrementKronkorke()">
+            <h1 id="kronkorke_value">15</h1>
           </div>
-      </div>
-      <div id="zigaretten" class="object">
+        </div>
+        <div id="zigaretten" class="object">
           <h3>Zigaretten</h3>
-          <div class="trapezoid" style="background-color: blue;">
-              <h1>8</h1>
+          <div class="trapezoid" id="zigaretten_box" style="background-color: blue;" onclick="incrementZigaretten()">
+            <h1 id="zigarette_value">13</h1>
           </div>
-      </div>
-      <div id="pet-deckel" class="object">
+        </div>
+        <div id="pet-deckel" class="object">
           <h3>PET-Deckel</h3>
-          <div class="trapezoid" style="background-color: yellow;">
-              <h1>8</h1>
+          <div class="trapezoid" style="background-color: yellow;" onclick="incrementPET()">
+            <h1 id="pet_value">8</h1>
           </div>
-      </div>
-      <div id="wertgegenstand" class="object">
+        </div>
+        <div id="wertgegenstand" class="object">
           <h3>Wertgegenstände</h3>
-          <div class="trapezoid" style="background-color: green;">
-              <h1>8</h1>
+          <div class="trapezoid" style="background-color: green;" onclick="incrementWert()">
+            <h1 id="wert_value">8</h1>
           </div>
+        </div>
       </div>
-			</div>
-			<div class="col-md-6">
-				<div class="row">
-					<div class="col-md-12 mb-4">
-						<div class="bg-white p-3">
-							<h1>04:00</h1>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12 mb-4">
+            <div class="bg-white p-3">
+              <h1>04:00</h1>
               <div id="data-container" style="background-color: antiquewhite;"></div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 mb-4">
-						<div class="bg-white p-3">
-              <img src="img/arbeitsplatz.jpg" alt="Arbeitsplatz" id="arbeitsplatz">
-              <img src="img/QR-Code.jpg" alt="QR-Code" id="qr-code">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 right-sidebar">
-				<div id="status" class="box">
-          <div class="label">
-              <h5>Status</h5>
-              <h6></h6>
+            </div>
           </div>
-          <div id="statusValue">
-              <h1>Running</h1>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-4">
+            <div class="bg-white p-3">
+              <img src="/img/arbeitsplatz.jpg" alt="Arbeitsplatz" id="arbeitsplatz">
+              <img src="/img/QR-Code.jpg" alt="QR-Code" id="qr-code">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 right-sidebar">
+        <div id="status" class="box">
+          <div class="label">
+            <h5>Status</h5>
+            <h6></h6>
+          </div>
+          <div>
+            <h1 id="status_value" onclick="changeStatus()">Start Modus</h1>
           </div>
         </div>
 
         <div id="power" class="box">
           <div class="label">
-              <h5>Stromverbrauch</h5>
+            <h5>Stromverbrauch</h5>
           </div>
-          <div id="powerValue">
-              <h1>500W</h1>
+          <div>
+            <!-- <h1 id="power_value">500W</h1> -->
+            <h1><span id="power-value"></span></h1>
 
           </div>
         </div>
-			</div>
-		</div>
-	</div>
-	<!-- Bootstrap JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-X+8WpR+aJvOSft1t99EJ9oqK3e2vMw/fiBCPhxdkAR8KpWbR1fb/HxlCtXaXt8DPlZbVErzYnl5P5x2In5l5Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      </div>
+    </div>
+  </div>
+  <!-- Socket.io -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+  </script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"
+    integrity="sha512-X+8WpR+aJvOSft1t99EJ9oqK3e2vMw/fiBCPhxdkAR8KpWbR1fb/HxlCtXaXt8DPlZbVErzYnl5P5x2In5l5Cw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
+
 </html>
