@@ -3,18 +3,44 @@ var socket = io("ws://localhost:3000");
 socket.on("connect", () => {
   console.log("Connected");
 
-  socket.on('updated', ({ token, event, text, status, timestamp, power, totalPower, count }) => {
-    // Update the status value on the HTML page
-    var statusElement = document.getElementById('status_value');
-    statusElement.textContent = status;
+  var countdownElement = document.getElementById('countdown');
+  var statusElement = document.getElementById('status_value');
+  var debugElement = document.getElementById('debug_value');
+  var textElement = document.getElementById('text_value');
+  var powerElement = document.getElementById('power_value');
+  var totalPowerElement = document.getElementById('totalpower_value');
+  var countdownDuration = 240; // 4 minutes in seconds
+  var countdownInterval;
 
-    var powerElement = document.getElementById('power_value');
-    var totalPowerElement = document.getElementById('totalpower_value');
+  socket.on('updated', ({ token, event, text, status, timestamp, power, debug_text, count }) => {
+    // Update the status value on the HTML page
+    
+    statusElement.textContent = status;
+    debugElement.textContent = debug_text;
+    textElement.textContent = text;
     powerElement.textContent = power;
     
     var currentTotalPower = parseFloat(totalPowerElement.textContent);
     var newTotalPower = currentTotalPower + parseFloat(power);
     totalPowerElement.textContent = newTotalPower;
+
+    if (power !== null) {
+      if (!countdownInterval) {
+        var countdownTime = countdownDuration;
+        countdownInterval = setInterval(() => {
+          var minutes = Math.floor(countdownTime / 60);
+          var seconds = countdownTime % 60;
+          countdownElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+          countdownTime--;
+
+          if (countdownTime < 0) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+            countdownElement.textContent = 'Countdown finished!';
+          }
+        }, 1000);
+      }
+    }
     
     switch (event) {
       case "ADD_PET":

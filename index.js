@@ -23,10 +23,10 @@ app.post("/api", function (req, res) {
   count++;
 
   // Perform necessary operations with the received data
-  const { token, event, text, status, timestamp, power, totalPower } = req.body;
+  const { token, event, text, status, timestamp, power, debug_text } = req.body;
 
   // Emit an event to the connected clients with the updated count and status
-  io.emit("updated", {token, event, text, status, timestamp, power, totalPower });
+  io.emit("updated", { token, event, text, status, timestamp, power, debug_text });
 
   res.send("POST request received");
 });
@@ -37,8 +37,8 @@ io.on('connection', (socket) => {
   console.log("Connected");
   socket.on('increment', () => {
     count++;
-
-    io.emit("updated", { token, event, text, status, timestamp, power, totalPower });
+    
+    io.emit("updated", { token, event, text, status, timestamp, power, debug_text });
   });
   console.log("count:", count);
 });
