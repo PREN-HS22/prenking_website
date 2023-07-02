@@ -27,7 +27,7 @@ app.post("/api", function (req, res) {
 
   // Emit an event to the connected clients with the updated count and status
   io.emit("updated", { token, event, text, status, timestamp, power, debug_text });
-
+  
   res.send("POST request received");
 });
 

@@ -12,9 +12,7 @@ socket.on("connect", () => {
   var countdownDuration = 240; // 4 minutes in seconds
   var countdownInterval;
 
-  socket.on('updated', ({ token, event, text, status, timestamp, power, debug_text, count }) => {
-    // Update the status value on the HTML page
-    
+  socket.on("updated", ({ token, event, text, status, timestamp, power, debug_text }) => {
     statusElement.textContent = status;
     debugElement.textContent = debug_text;
     textElement.textContent = text;
